@@ -1,6 +1,6 @@
 public class TreeIterator implements Iterator<Integer>{
     private Node next;
-    //private Stack<Node> stack;
+    private Stack<Node> stack;
     public TreeIterator() {
 
     }

@@ -11,45 +11,28 @@ public class BinaryTree implements Iterable<Integer>{
         Node nextNode = this.root;
         if (nextNode == null) { //om tree är empty()
             this.root = new Node(key, value);
+            return;
         }
-        if (nextNode.key == key) { //om nod har samma keyvärde
+        if (nextNode.key.equals(key)) { //om nod har samma keyvärde
             nextNode.value = value;
             return;
         }
-
-        if (nextNode.key < key) { //om nod just nu är till vänster
-            if(nextNode == null) {
-                nextNode = new Node(key, value);
-            } else {
-                nextNode = nextNode.left;
-            }
-        } else { //om nod just nu är till höger
-            if(nextNode == null) {
-                nextNode = new Node(key, value);
-            } else {
-                nextNode = nextNode.right;
-            }
-        }
+        Node leaf = traverse(key, nextNode);
+        leaf = new Node(key, value);
     }
-    public boolean lookup(Integer key) {
-        Node nextNode = this.root;
-        Node foundedNode = traverse(key, nextNode);
-        if(foundedNode == null){
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     private Node traverse(Integer key, Node traverseNode) {
         if (traverseNode.key < key) {
             if (traverseNode.left == null) {
+                return traverseNode;
+            } else if (traverseNode.right == null) {
                 return traverseNode;
             } else {
                 traverse(key, traverseNode.left);
             }
         } else {
-            if (traverseNode.right == null) {
+            if (traverseNode.left == null) {
+                return traverseNode;
+            } else if (traverseNode.right == null) {
                 return traverseNode;
             } else {
                 traverse(key, traverseNode.right);
@@ -57,6 +40,31 @@ public class BinaryTree implements Iterable<Integer>{
         }
         return null;
     }
-
+    public boolean lookup(Integer key) {
+        Node nextNode = this.root;
+        return search(key, nextNode);
+    }
+    private boolean search(Integer key, Node traverseNode) {
+        if (traverseNode.key.equals(key)) {
+            return true;
+        } else if (traverseNode.key < key) {
+            if (traverseNode.left == null) {
+                return false;
+            } else if (traverseNode.right == null) {
+                return false;
+            } else {
+                search(key, traverseNode.left);
+            }
+        } else {
+            if (traverseNode.left == null) {
+                return false;
+            } else if (traverseNode.right == null) {
+                return false;
+            } else {
+                search(key, traverseNode.right);
+            }
+        }
+        return false;
+    }
 
 }
