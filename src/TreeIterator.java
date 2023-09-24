@@ -1,8 +1,10 @@
-public class TreeIterator implements Iterator<Integer>{
+import java.util.Iterator;
+
+public class TreeIterator implements Iterator<Integer> {
     private Node next;
     private Stack<Node> stack;
     public TreeIterator() {
-
+        while ()
     }
     @Override
     public boolean hasNext() {
@@ -10,7 +12,7 @@ public class TreeIterator implements Iterator<Integer>{
     }
     @Override
     public Integer next() {
-
+        return next.value;
     }
     @Override
     public void remove() {
