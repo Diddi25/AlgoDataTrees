@@ -5,9 +5,6 @@ public class BinaryTree implements Iterable<Integer>{
     public BinaryTree() {
         root = null;
     }
-    public Node getRoot() {
-        return this.root;
-    }
     public Iterator<Integer> iterator() {
         return new TreeIterator(this.root);
     }
@@ -17,14 +14,18 @@ public class BinaryTree implements Iterable<Integer>{
             this.root = new Node(key, value);
             return;
         }
-        if (nextNode.key.equals(key)) { //om nod har samma keyvärde
-            nextNode.value = value;
-            return;
+        Node leafParent = traverse(key, nextNode);
+        if(key < leafParent.key) {
+            leafParent.left = new Node(key, value);
+        } else {
+            leafParent.right = new Node(key, value);
         }
-        Node leaf = traverse(key, nextNode);
-        leaf = new Node(key, value);
+
     }
     private Node traverse(Integer key, Node traverseNode) {
+        if (traverseNode.key.equals(key)) { //om nod har samma keyvärde
+            return traverseNode;
+        }
         if (traverseNode.key < key) {
             if (traverseNode.left == null) {
                 return traverseNode;
@@ -70,5 +71,33 @@ public class BinaryTree implements Iterable<Integer>{
         }
         return false;
     }
+
+    /*
+    public void remove(Integer key) {
+        Node nextNode = this.root;
+        if(lookup(key)) {
+            if (nextNode.key.equals(key)) {
+                nextNode.right
+                this.root =
+            } else if (nextNode.key < key) {
+                if (nextNode.left == null) {
+                    return false;
+                } else if (nextNode.right == null) {
+                    return false;
+                } else {
+                    search(key, nextNode.left);
+                }
+            } else {
+                if (nextNode.left == null) {
+                    return false;
+                } else if (nextNode.right == null) {
+                    return false;
+                } else {
+                    search(key, nextNode.right);
+                }
+            }
+        }
+    }
+    */
 
 }

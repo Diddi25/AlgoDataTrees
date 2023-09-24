@@ -21,7 +21,7 @@ public class TreeIterator implements Iterator<Integer> {
     }
     @Override
     public boolean hasNext() {
-        return stack.pop() ==-1 ;
+        return stack.pop() != -1 ;
     }
     @Override
     public Integer next() {
