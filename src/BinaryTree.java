@@ -9,36 +9,38 @@ public class BinaryTree implements Iterable<Integer>{
     }
     public void add(Integer key, Integer value) {
         Node newNode = new Node(key, value);
-        Node nextNode = root;
+        Node nextNode = this.root;
         if(nextNode == null) {
-            newNode = newNode;
+            this.root = newNode;
         }
-        if(nextNode.key.equals(key)) {
-            nextNode.value = newNode.value;
-        }
+        Node foundedNode = traverse(key, nextNode);
+        foundedNode.right = nextNode;
     }
     public boolean lookup(Integer key) {
-        Node nextNode = root;
-        while(nextNode != null) {
-            if(nextNode.key < key) {
-                nextNode = nextNode.left;
-                if(nextNode.key == key) {
-                    return true;
-                }
-            }
-            if(nextNode.key > key) {
-                nextNode = nextNode.right;
-                if(nextNode.key == key) {
-                    return true;
-                }
-            }
+        Node nextNode = this.root;
+        Node foundedNode = traverse(key, nextNode);
+        if(foundedNode == null){
+            return false;
+        } else {
+            return true;
         }
-        return false;
     }
 
-    private Node traverse(Integer key) {
-        int pointer = 0;
-
+    private Node traverse(Integer key, Node traverseNode) {
+        if(traverseNode.key < key) {
+            if (traverseNode.left == null) {
+                return traverseNode;
+            } else {
+                traverse(key, traverseNode.left);
+            }
+        } else {
+            if(traverseNode.right == null) {
+                return traverseNode;
+            } else {
+                traverse(key, traverseNode.right);
+            }
+        }
+        return null;
     }
 
 
