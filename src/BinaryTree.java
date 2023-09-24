@@ -5,8 +5,11 @@ public class BinaryTree implements Iterable<Integer>{
     public BinaryTree() {
         root = null;
     }
+    public Node getRoot() {
+        return this.root;
+    }
     public Iterator<Integer> iterator() {
-        return new TreeIterator();
+        return new TreeIterator(this.root);
     }
     public void add(Integer key, Integer value) {
         Node nextNode = this.root;
