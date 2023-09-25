@@ -16,9 +16,12 @@ public class Main {
         tree.remove(7);
         tree.lookup(13);
 
+        //tree.print();
+
         for (int i : tree) {
             System.out.println("next value " + i);
         }
+
     }
 
     private void testIterator() {

@@ -5,23 +5,20 @@ public class TreeIterator implements Iterator<Integer> {
     private Stack<Node> stack;
     public TreeIterator(Node root) {
         this.next = root;
-        Node preliminary = this.next;
-        stack.push(preliminary.value);
-        traverse(preliminary);
+        this.stack = new Stack<>();
+        newAttempt(this.next);
     }
-    private void traverse(Node preliminary) {
-        if (preliminary.left != null) {
-            stack.push(preliminary.value);
-            traverse(preliminary.left);
+    private void newAttempt(Node current) {
+        if(current == null) {
+            return;
         }
-        if (preliminary.right != null) {
-            stack.push(preliminary.value);
-            traverse(preliminary.right);
-        }
+        newAttempt(current.left);
+        stack.push(current.value);
+        newAttempt(current.right);
     }
     @Override
     public boolean hasNext() {
-        return stack.pop() != -1 ;
+        return stack.pop() != -1 || next != null;
     }
     @Override
     public Integer next() {
