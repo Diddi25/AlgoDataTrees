@@ -8,48 +8,15 @@ public class BinaryTree implements Iterable<Integer>{
     public Iterator<Integer> iterator() {
         return new TreeIterator(this.root);
     }
-    public void add(Integer key, Integer value, int valuable) {
-        Node nextNode = this.root;
-        if (nextNode == null) { //om tree är empty()
-            this.root = new Node(key, value);
-            return;
-        }
-        Node leafParent = traverse(key, nextNode);
-        if(leafParent.key.equals(key)) {
 
-        }
-        if(key < leafParent.key) {
-            leafParent.left = new Node(key, value);
-        } else {
-            leafParent.right = new Node(key, value);
-        }
-    }
     public void add(Integer key, Integer value) {
         if(this.root == null) {
             this.root = new Node(key, value);
         } else {
-            this.root.addi(key,value);
+            this.root.addInNodeClass(key,value);
         }
     }
-    private Node traverse(Integer key, Node traverseNode) {
-        if (traverseNode.key.equals(key)) { //om nod har samma keyvärde
-            return traverseNode;
-        }
-        if (traverseNode.key > key) {
-            if (traverseNode.left == null || traverseNode.right == null) {
-                return traverseNode;
-            } else {
-                traverse(key, traverseNode.left);
-            }
-        } else {
-            if (traverseNode.left == null || traverseNode.right == null) {
-                return traverseNode;
-            } else {
-                traverse(key, traverseNode.right);
-            }
-        }
-        return null;
-    }
+
     public boolean lookup(Integer key) {
         Node nextNode = this.root;
         return search(key, nextNode);
