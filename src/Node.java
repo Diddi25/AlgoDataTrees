@@ -47,7 +47,7 @@ public class Node {
     }
     public void delete(Integer key) {
         if (this.left.key.equals(key)) {
-            Node foundedLargestKey = this.left.right.findLargestLeafInLeft();
+            Node foundedLargestKey = this.left.left.findLargestLeafInLeft();
             if(foundedLargestKey == null) {
                 return;
             } else {
@@ -60,7 +60,7 @@ public class Node {
             }
         }
         if (this.right.key.equals(key)) {
-            Node foundedSmallestKey = this.right.left.findSmallestLeafInRight();
+            Node foundedSmallestKey = this.right.right.findSmallestLeafInRight();
             if(foundedSmallestKey == null) {
                 return;
             } else {
@@ -93,6 +93,11 @@ public class Node {
             this.left.findSmallestLeafInRight();
         }
         return null;
+    }
+    private Node findSmallestLeafInRight2() {
+        while(this.left.left != null) {
+            this = this.left;
+        }
     }
     private Node findLargestLeafInLeft() {
         if (this.right.right == null) {
