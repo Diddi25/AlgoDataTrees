@@ -28,4 +28,24 @@ public class Node {
         }
     }
 
+    public boolean contains(Integer key) {
+        if (this.key.equals(key)) {
+            return true;
+        }
+        if (this.key > key) {
+            if (this.left == null) {
+                return false;
+            } else {
+                this.left.contains(key);
+            }
+        } else {
+            if (this.right == null) {
+                return false;
+            } else {
+                this.right.contains(key);
+            }
+        }
+        return false;
+    }
+
 }
