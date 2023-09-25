@@ -11,6 +11,8 @@ public class Main {
         tree.add(6,106);
         tree.add(3,103);
 
+        tree.remove(7);
+
         for (int i : tree) {
             System.out.println("next value " + i);
         }

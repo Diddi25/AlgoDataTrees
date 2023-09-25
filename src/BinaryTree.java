@@ -8,7 +8,6 @@ public class BinaryTree implements Iterable<Integer>{
     public Iterator<Integer> iterator() {
         return new TreeIterator(this.root);
     }
-
     public void add(Integer key, Integer value) {
         if(this.root == null) {
             this.root = new Node(key, value);
@@ -16,7 +15,6 @@ public class BinaryTree implements Iterable<Integer>{
             this.root.addInNodeClass(key,value);
         }
     }
-
     public boolean lookup(Integer key) {
         if (this.root == null) {
             return false;
@@ -25,12 +23,11 @@ public class BinaryTree implements Iterable<Integer>{
         }
         return false;
     }
-
     public void remove(Integer key) {
         if(this.root == null) {
-            //egen metod
+            return;
         } else {
-
+            this.root.deleteNr2(key);
         }
     }
 
