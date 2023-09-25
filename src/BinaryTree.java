@@ -24,10 +24,10 @@ public class BinaryTree implements Iterable<Integer>{
         return false;
     }
     public void remove(Integer key) {
-        if(this.root == null) {
+        if (this.root == null) {
             return;
         } else {
-            this.root.deleteNr2(key);
+            this.root.delete(key);
         }
     }
 

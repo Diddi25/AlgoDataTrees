@@ -47,26 +47,28 @@ public class Node {
     }
     public void delete(Integer key) {
         if (this.left.key.equals(key)) {
-            Node foundedSmallestKey = this.right.findSmallest();
-            if(foundedSmallestKey == null) {
+            Node foundedLargestKey = this.left.right.findLargestLeafInLeft();
+            if(foundedLargestKey == null) {
                 return;
             } else {
-                this.key = foundedSmallestKey.key;
-                this.value = foundedSmallestKey.value;
-                this.left = this.left.left;
-                this.right = this.right.right;
+                Node save2right = this.left.right;
+                Node save2left = this.left.left;
+                this.left = foundedLargestKey;
+                this.left.left = save2left;
+                this.left.right = save2right;
                 return;
             }
         }
         if (this.right.key.equals(key)) {
-            Node foundedSmallestKey = this.right.left.findSmallest();
+            Node foundedSmallestKey = this.right.left.findSmallestLeafInRight();
             if(foundedSmallestKey == null) {
                 return;
             } else {
-                this.key = foundedSmallestKey.key;
-                this.value = foundedSmallestKey.value;
-                this.left = this.left.left;
-                this.right = this.right.right;
+                Node save2Right = this.right.right;
+                Node save2Left = this.right.left;
+                this.right = foundedSmallestKey;
+                this.right.right = save2Right;
+                this.right.left = save2Left;
                 return;
             }
         }
@@ -84,45 +86,21 @@ public class Node {
             }
         }
     }
-    private Node findSmallest() {
-        if (this.left == null) {
-            return this;
+    private Node findSmallestLeafInRight() {
+        if (this.left.left == null) {
+            return this.left;
         } else {
-            this.left.findSmallest();
+            this.left.findSmallestLeafInRight();
         }
         return null;
     }
-    public void deleteNr2(Integer key) {
-        if (this.key.equals(key)) {
-            Node whatDoIDoWithThis = this.promote();
+    private Node findLargestLeafInLeft() {
+        if (this.right.right == null) {
+            return this.right;
         } else {
-            if(this.key > key) {
-                if(this.left == null) {
-                    return; //didnt find that integer to the left
-                } else {
-                    this.delete(key);
-                }
-            } else {
-                if(this.right == null) {
-                    return; //didnt find that integer to the right
-                } else {
-                    this.delete(key);
-                }
-            }
+            this.right.findLargestLeafInLeft();
         }
-    }
-    private Node promote() {
-        if (this.left == null) {
-            return this;
-        }
-        Node current = this;
-        while (current.left.left != null) {
-            current = current.left;
-        }
-        Node aNode = current.left;
-        current.left = current.left.right;
-        aNode.right = this;
-        return aNode;
+        return null;
     }
 
 }
