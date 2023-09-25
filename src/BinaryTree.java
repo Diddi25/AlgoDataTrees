@@ -26,18 +26,14 @@ public class BinaryTree implements Iterable<Integer>{
         if (traverseNode.key.equals(key)) { //om nod har samma keyvärde
             return traverseNode;
         }
-        if (traverseNode.key < key) {
-            if (traverseNode.left == null) {
-                return traverseNode;
-            } else if (traverseNode.right == null) {
+        if (traverseNode.key > key) {
+            if (traverseNode.left == null || traverseNode.right == null) {
                 return traverseNode;
             } else {
                 traverse(key, traverseNode.left);
             }
         } else {
-            if (traverseNode.left == null) {
-                return traverseNode;
-            } else if (traverseNode.right == null) {
+            if (traverseNode.left == null || traverseNode.right == null) {
                 return traverseNode;
             } else {
                 traverse(key, traverseNode.right);
