@@ -90,22 +90,16 @@ public class Node {
         if (this.left.left == null) {
             return this.left;
         } else {
-            this.left.findSmallestLeafInRight();
-        }
-        return null;
-    }
-    private Node findSmallestLeafInRight2() {
-        while(this.left.left != null) {
-            this = this.left;
+            return this.left.findSmallestLeafInRight();
         }
     }
+
     private Node findLargestLeafInLeft() {
         if (this.right.right == null) {
             return this.right;
         } else {
-            this.right.findLargestLeafInLeft();
+            return this.right.findLargestLeafInLeft();
         }
-        return null;
     }
 
 }

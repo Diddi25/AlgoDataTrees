@@ -39,23 +39,4 @@ public class BinaryTree implements Iterable<Integer>{
     }
     */
 
-
-    /*
-    public Node remove(Integer key) {
-        if(key == key) {
-            if(key > key) {
-                if(left != null) {
-                    left = left.delete(key);
-                }
-                return this;
-            } else {
-                if(right != null) {
-                    right = right.delete(key);
-                }
-                return this;
-            }
-        }
-    }
-    */
-
 }
