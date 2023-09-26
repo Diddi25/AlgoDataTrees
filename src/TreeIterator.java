@@ -6,7 +6,7 @@ public class TreeIterator implements Iterator<Integer> {
     public TreeIterator(Node root) {
         this.next = root;
         this.stack = new Stack<>();
-        newAttempt(this.next);
+        //newAttempt(this.next);
     }
     private void newAttempt(Node current) {
         if(current == null) {
@@ -18,11 +18,22 @@ public class TreeIterator implements Iterator<Integer> {
     }
     @Override
     public boolean hasNext() {
-        return stack.pop() != -1 || next != null;
+        return this.stack.isEmpty();
     }
     @Override
     public Integer next() {
-        return stack.pop();
+        Integer item = null;
+        do {
+            if (this.next != null) {
+                this.stack.push(this.next.value);
+                this.next = this.next.left;
+            } else {
+                this.next.value = stack.pop();
+                item = this.next.value;
+                break;
+            }
+        } while (!this.stack.isEmpty());
+        return item;
     }
     @Override
     public void remove() {

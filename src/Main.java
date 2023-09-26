@@ -1,7 +1,7 @@
 
 public class Main {
     public static void main(String[] args) {
-        BinaryTree tree = new BinaryTree();
+        BinaryTree<Node<Integer, Integer>> tree = new BinaryTree<>();
 
         tree.add(5,105);
         tree.add(2,102);
@@ -13,8 +13,6 @@ public class Main {
         tree.add(10,112);
         tree.add(13,124);
 
-        tree.remove(7);
-        tree.lookup(13);
 
         //tree.print();
 

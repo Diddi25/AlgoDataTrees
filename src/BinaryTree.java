@@ -1,16 +1,16 @@
 import java.util.Iterator;
 
-public class BinaryTree implements Iterable<Integer>{
-    Node root;
+public class BinaryTree<T> implements Iterable<Integer>{
+    Node<K,V> root;
     public BinaryTree() {
         root = null;
     }
     public Iterator<Integer> iterator() {
         return new TreeIterator(this.root);
     }
-    public void add(Integer key, Integer value) {
+    public <K,V> void add(K key, V value) {
         if(this.root == null) {
-            this.root = new Node(key, value);
+            this.root = new Node<K,V>(key, value);
         } else {
             this.root.addInNodeClass(key,value);
         }
@@ -30,12 +30,5 @@ public class BinaryTree implements Iterable<Integer>{
             this.root.delete(key);
         }
     }
-
-    /*
-    @Override
-    public int compareTo(K o) {
-        return 0;
-    }
-    */
 
 }

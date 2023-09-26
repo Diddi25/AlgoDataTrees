@@ -1,18 +1,18 @@
-public class Node {
-    public Integer key;
-    public Integer value;
-    public Node left, right;
-    public Node(Integer key, Integer value) {
+public class Node<K,V> implements Comparable<K>{
+    public K key;
+    public V value;
+    public Node<K,V> left, right;
+    public Node(K key, V value) {
         this.key = key;
         this.value = value;
         this.left = this.right = null;
     }
-    public void addInNodeClass(Integer key,Integer value) {
+    public <K,V> void addInNodeClass(K key,V value) {
         if (this.key.equals(key)) {
             this.value = value ;
             return;
         }
-        if (this.key > key) {
+        if (this.compareTo(key) > 0) {
             if (this.left == null) {
                 this.left = new Node(key, value);
             } else {
@@ -26,6 +26,7 @@ public class Node {
             }
         }
     }
+
     public boolean contains(Integer key) {
         if (this.key.equals(key)) {
             return true;
@@ -102,4 +103,11 @@ public class Node {
         }
     }
 
+    @Override
+    public int compareTo(K key) {
+        if(this.key > key) {
+            return 1;
+        }
+        return 0;
+    }
 }

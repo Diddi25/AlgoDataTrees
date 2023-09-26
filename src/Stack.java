@@ -1,5 +1,5 @@
 public class Stack<K> {
-    private int[] dynamicStack = new int[4];
+    private int[] dynamicStack = new int[14];
     private int dynamicStackPointer = 0;
     public void push(int value) {
         if (dynamicStackPointer == dynamicStack.length - 1) {
@@ -9,7 +9,7 @@ public class Stack<K> {
         dynamicStackPointer++;
     }
     public int pop() {
-        if (dynamicStack.length == 0) {
+        if (this.isEmpty()) {
             return -1;
         }
         determineIfStackShouldShrink();
@@ -29,4 +29,7 @@ public class Stack<K> {
         dynamicStack = newDynamicStack;
     }
 
+    public boolean isEmpty() {
+        return dynamicStackPointer == 0;
+    }
 }
