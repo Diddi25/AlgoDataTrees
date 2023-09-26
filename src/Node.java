@@ -1,4 +1,4 @@
-public class Node<K,V> implements Comparable<K>{
+public class  Node<K extends Comparable<K>, V> implements Comparable<K> {
     public K key;
     public V value;
     public Node<K,V> left, right;
@@ -7,7 +7,7 @@ public class Node<K,V> implements Comparable<K>{
         this.value = value;
         this.left = this.right = null;
     }
-    public <K,V> void addInNodeClass(K key,V value) {
+    public void addInNodeClass(K key,V value) {
         if (this.key.equals(key)) {
             this.value = value ;
             return;
@@ -27,11 +27,11 @@ public class Node<K,V> implements Comparable<K>{
         }
     }
 
-    public boolean contains(Integer key) {
+    public boolean contains(K key) {
         if (this.key.equals(key)) {
             return true;
         }
-        if (this.key > key) {
+        if (this.compareTo(key) > 0) {
             if (this.left == null) {
                 return false;
             } else {
@@ -46,7 +46,7 @@ public class Node<K,V> implements Comparable<K>{
         }
         return false;
     }
-    public void delete(Integer key) {
+    public void delete(K key) {
         if (this.left.key.equals(key)) {
             Node foundedLargestKey = this.left.left.findLargestLeafInLeft();
             if(foundedLargestKey == null) {
@@ -73,7 +73,7 @@ public class Node<K,V> implements Comparable<K>{
                 return;
             }
         }
-        if (this.key > key) {
+        if (this.compareTo(key) > 0) {
             if (this.left == null) {
                 return;
             } else {
@@ -104,10 +104,7 @@ public class Node<K,V> implements Comparable<K>{
     }
 
     @Override
-    public int compareTo(K key) {
-        if(this.key > key) {
-            return 1;
-        }
-        return 0;
+    public int compareTo(K otherKey) {
+        return this.key.compareTo(otherKey);
     }
 }

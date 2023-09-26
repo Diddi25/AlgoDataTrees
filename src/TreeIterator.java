@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class TreeIterator implements Iterator<Integer> {
+public class TreeIterator implements Iterator<Node> {
     private Node next;
     private Stack<Node> stack;
     public TreeIterator(Node root) {
@@ -13,7 +13,7 @@ public class TreeIterator implements Iterator<Integer> {
             return;
         }
         newAttempt(current.left);
-        stack.push(current.value);
+        stack.push(current);
         newAttempt(current.right);
     }
     @Override
@@ -21,15 +21,15 @@ public class TreeIterator implements Iterator<Integer> {
         return this.stack.isEmpty();
     }
     @Override
-    public Integer next() {
-        Integer item = null;
+    public Node next() {
+        Node item = null;
         do {
             if (this.next != null) {
-                this.stack.push(this.next.value);
+                this.stack.push(this.next);
                 this.next = this.next.left;
             } else {
-                this.next.value = stack.pop();
-                item = this.next.value;
+                this.next = stack.pop();
+                item = this.next;
                 break;
             }
         } while (!this.stack.isEmpty());

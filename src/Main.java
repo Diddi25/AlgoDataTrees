@@ -1,7 +1,7 @@
 
 public class Main {
     public static void main(String[] args) {
-        BinaryTree<Node<Integer, Integer>> tree = new BinaryTree<>();
+        BinaryTree<Integer,Integer> tree = new BinaryTree<>();
 
         tree.add(5,105);
         tree.add(2,102);
@@ -15,11 +15,11 @@ public class Main {
 
 
         //tree.print();
-
-        for (int i : tree) {
-            System.out.println("next value " + i);
-        }
-
+while (tree.iterator().hasNext()) {
+    System.out.printf("");
+    Object value = tree.iterator().next().value;
+}
+        System.out.printf("hej");
     }
 
     private void testIterator() {

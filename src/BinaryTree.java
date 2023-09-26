@@ -1,21 +1,23 @@
 import java.util.Iterator;
 
-public class BinaryTree<T> implements Iterable<Integer>{
-    Node<K,V> root;
+public class BinaryTree<K extends Comparable<K>, V> implements Iterable{
+    Node<K, V> root;
+
     public BinaryTree() {
         root = null;
     }
-    public Iterator<Integer> iterator() {
+
+    public Iterator<Node> iterator() {
         return new TreeIterator(this.root);
     }
-    public <K,V> void add(K key, V value) {
+    public void add(K key, V value) {
         if(this.root == null) {
-            this.root = new Node<K,V>(key, value);
+            this.root = new Node(key, value);
         } else {
             this.root.addInNodeClass(key,value);
         }
     }
-    public boolean lookup(Integer key) {
+    public boolean lookup(K key) {
         if (this.root == null) {
             return false;
         } else {
@@ -23,7 +25,7 @@ public class BinaryTree<T> implements Iterable<Integer>{
         }
         return false;
     }
-    public void remove(Integer key) {
+    public void remove(K key) {
         if (this.root == null) {
             return;
         } else {

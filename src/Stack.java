@@ -1,31 +1,34 @@
 public class Stack<K> {
-    private int[] dynamicStack = new int[14];
+    private Node[] dynamicStack = new Node[14];
     private int dynamicStackPointer = 0;
-    public void push(int value) {
+    public void push(Node value) {
         if (dynamicStackPointer == dynamicStack.length - 1) {
-            copyItemsToNewStack(new int[dynamicStack.length*2]);
+            copyItemsToNewStack(new Node[dynamicStack.length*2]);
         }
         dynamicStack[dynamicStackPointer] = value;
         dynamicStackPointer++;
     }
-    public int pop() {
+    public Node pop() {
         if (this.isEmpty()) {
-            return -1;
+            return null;
         }
         determineIfStackShouldShrink();
-        int popNumber = dynamicStack[--dynamicStackPointer];
-        dynamicStack[dynamicStackPointer] = 0;
+        Node popNumber = dynamicStack[--dynamicStackPointer];
+        dynamicStack[dynamicStackPointer] = null;
         return popNumber;
     }
     private void determineIfStackShouldShrink() {
         if (dynamicStack.length - dynamicStackPointer >= 20) {
-            copyItemsToNewStack(new int[dynamicStack.length - 20]);
+            copyItemsToNewStack(new Node[dynamicStack.length - 20]);
         }
         return;
     }
-    private void copyItemsToNewStack(int[] newDynamicStack) {
-        if (dynamicStackPointer >= 0)
-            System.arraycopy(dynamicStack, 0, newDynamicStack, 0, dynamicStackPointer);
+    private void copyItemsToNewStack(Node[] newDynamicStack) {
+        if (dynamicStackPointer >= 0) {
+            for (int i = 0; i < dynamicStackPointer - 1; i++) {
+                newDynamicStack[i] = dynamicStack[i];
+            }
+        }
         dynamicStack = newDynamicStack;
     }
 
