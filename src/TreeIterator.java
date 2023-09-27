@@ -1,18 +1,15 @@
 import java.util.Iterator;
 
-public class TreeIterator implements Iterator<Node> {
-    private Node next;
-    private Stack<Node> stack;
-    public TreeIterator(Node root) {
-        this.next = root;
+public class TreeIterator<K extends Comparable <K>,V> implements Iterator<Node<K,V>> {
+    private final Stack<K,V> stack;
+    public TreeIterator(Node<K,V> root) {
         this.stack = new Stack<>();
-        pushAllLeftNodes(this.next);
+        pushAllLeftNodes(root);
     }
-    private void pushAllLeftNodes(Node current) {
+    private void pushAllLeftNodes(Node<K,V> current) {
         while(current != null) {
             stack.push(current);
             current = current.left;
-
         }
     }
     @Override
@@ -20,8 +17,8 @@ public class TreeIterator implements Iterator<Node> {
         return !this.stack.isEmpty();
     }
     @Override
-    public Node next() {
-        Node current = stack.pop();
+    public Node<K,V> next() {
+        Node<K,V> current = stack.pop();
         pushAllLeftNodes(current.right);
         return current;
     }

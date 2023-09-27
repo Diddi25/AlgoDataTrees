@@ -1,5 +1,3 @@
-import java.util.Iterator;
-
 public class Main {
     public static void main(String[] args) {
         BinaryTree<Integer, Integer> tree = new BinaryTree<>();
@@ -14,24 +12,12 @@ public class Main {
         tree.add(10, 112);
         tree.add(13, 124);
 
-
-        //tree.print();
-
-        /*
-        for (Iterator<Node> it = iterator; it.hasNext(); ) {
-            Node i = it.next();
+        for (Node<Integer,Integer> i: tree) {
             System.out.println("next value " + i.value);
         }
-
-         */
-
-        for (Integer i: tree) {
-            System.out.println("next value " + i);
-        }
-
     }
 
-    private void testIterator() {
+    private void testIterator(BinaryTree<Integer, Integer> tree) {
 
     }
 

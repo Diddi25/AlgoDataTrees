@@ -1,19 +1,19 @@
-public class Stack<K> {
-    private Node[] dynamicStack = new Node[14];
+public class Stack<K extends Comparable<K>, V> {
+    private Node<K,V>[] dynamicStack = new Node[14];
     private int dynamicStackPointer = 0;
-    public void push(Node value) {
+    public void push(Node<K,V> value) {
         if (dynamicStackPointer == dynamicStack.length - 1) {
             copyItemsToNewStack(new Node[dynamicStack.length*2]);
         }
         dynamicStack[dynamicStackPointer] = value;
         dynamicStackPointer++;
     }
-    public Node pop() {
+    public Node<K,V> pop() {
         if (this.isEmpty()) {
             return null;
         }
         determineIfStackShouldShrink();
-        Node popNode = dynamicStack[--dynamicStackPointer];
+        Node<K,V> popNode = dynamicStack[--dynamicStackPointer];
         dynamicStack[dynamicStackPointer] = null;
         return popNode;
     }
@@ -21,9 +21,8 @@ public class Stack<K> {
         if (dynamicStack.length - dynamicStackPointer >= 20) {
             copyItemsToNewStack(new Node[dynamicStack.length - 20]);
         }
-        return;
     }
-    private void copyItemsToNewStack(Node[] newDynamicStack) {
+    private void copyItemsToNewStack(Node<K,V>[] newDynamicStack) {
         if (dynamicStackPointer >= 0) {
             for (int i = 0; i < dynamicStackPointer - 1; i++) {
                 newDynamicStack[i] = dynamicStack[i];

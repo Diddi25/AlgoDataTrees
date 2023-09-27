@@ -1,4 +1,4 @@
-public class  Node<K extends Comparable<K>, V> implements Comparable<K> {
+public class Node<K extends Comparable<K>, V> implements Comparable<K> {
     public K key;
     public V value;
     public Node<K,V> left, right;
@@ -14,13 +14,13 @@ public class  Node<K extends Comparable<K>, V> implements Comparable<K> {
         }
         if (this.compareTo(key) > 0) {
             if (this.left == null) {
-                this.left = new Node(key, value);
+                this.left = new Node<>(key, value);
             } else {
                 this.left.addInNodeClass(key, value);
             }
         } else {
             if (this.right == null) {
-                this.right = new Node(key, value);
+                this.right = new Node<>(key, value);
             } else {
                 this.right.addInNodeClass(key, value);
             }
@@ -35,43 +35,38 @@ public class  Node<K extends Comparable<K>, V> implements Comparable<K> {
             if (this.left == null) {
                 return false;
             } else {
-                this.left.contains(key);
+                return this.left.contains(key);
             }
         } else {
             if (this.right == null) {
                 return false;
             } else {
-                this.right.contains(key);
+                return this.right.contains(key);
             }
         }
-        return false;
     }
     public void delete(K key) {
         if (this.left.key.equals(key)) {
-            Node foundedLargestKey = this.left.left.findLargestLeafInLeft();
-            if(foundedLargestKey == null) {
-                return;
-            } else {
-                Node save2right = this.left.right;
-                Node save2left = this.left.left;
+            Node<K,V> foundedLargestKey = this.left.left.findLargestLeafInLeft();
+            if (foundedLargestKey != null) {
+                Node<K, V> save2right = this.left.right;
+                Node<K, V> save2left = this.left.left;
                 this.left = foundedLargestKey;
                 this.left.left = save2left;
                 this.left.right = save2right;
-                return;
             }
+            return;
         }
         if (this.right.key.equals(key)) {
-            Node foundedSmallestKey = this.right.right.findSmallestLeafInRight();
-            if(foundedSmallestKey == null) {
-                return;
-            } else {
-                Node save2Right = this.right.right;
-                Node save2Left = this.right.left;
+            Node<K,V> foundedSmallestKey = this.right.right.findSmallestLeafInRight();
+            if (foundedSmallestKey != null) {
+                Node<K,V> save2Right = this.right.right;
+                Node<K,V> save2Left = this.right.left;
                 this.right = foundedSmallestKey;
                 this.right.right = save2Right;
                 this.right.left = save2Left;
-                return;
             }
+            return;
         }
         if (this.compareTo(key) > 0) {
             if (this.left == null) {
@@ -87,7 +82,7 @@ public class  Node<K extends Comparable<K>, V> implements Comparable<K> {
             }
         }
     }
-    private Node findSmallestLeafInRight() {
+    private Node<K,V> findSmallestLeafInRight() {
         if (this.left.left == null) {
             return this.left;
         } else {
@@ -95,7 +90,7 @@ public class  Node<K extends Comparable<K>, V> implements Comparable<K> {
         }
     }
 
-    private Node findLargestLeafInLeft() {
+    private Node<K,V> findLargestLeafInLeft() {
         if (this.right.right == null) {
             return this.right;
         } else {

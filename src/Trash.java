@@ -31,4 +31,10 @@ public class Trash {
         return item;
     }
      */
+    /*
+    for (Iterator<Node> it = iterator; it.hasNext(); ) {
+            Node i = it.next();
+            System.out.println("next value " + i.value);
+        }
+     */
 }
