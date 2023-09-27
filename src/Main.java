@@ -12,7 +12,7 @@ public class Main {
         tree.add(10, 112);
         tree.add(13, 124);
 
-        for (Node<Integer,Integer> i: tree) {
+        for (Node<Integer, Integer> i: tree) {
             System.out.println("next value " + i.value);
         }
     }
