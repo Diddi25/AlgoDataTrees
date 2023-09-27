@@ -1,13 +1,11 @@
 import java.util.Iterator;
 
-public class BinaryTree<K extends Comparable<K>, V> implements Iterable{
+public class BinaryTree<K extends Comparable<K>, V> implements Iterable <Integer>{
     Node<K, V> root;
-
     public BinaryTree() {
         root = null;
     }
-
-    public Iterator<Node> iterator() {
+    public Iterator<Integer> iterator() {
         return new TreeIterator(this.root);
     }
     public void add(K key, V value) {

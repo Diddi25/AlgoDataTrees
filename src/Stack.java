@@ -13,9 +13,9 @@ public class Stack<K> {
             return null;
         }
         determineIfStackShouldShrink();
-        Node popNumber = dynamicStack[--dynamicStackPointer];
+        Node popNode = dynamicStack[--dynamicStackPointer];
         dynamicStack[dynamicStackPointer] = null;
-        return popNumber;
+        return popNode;
     }
     private void determineIfStackShouldShrink() {
         if (dynamicStack.length - dynamicStackPointer >= 20) {

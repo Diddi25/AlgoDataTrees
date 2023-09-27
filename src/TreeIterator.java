@@ -6,34 +6,24 @@ public class TreeIterator implements Iterator<Node> {
     public TreeIterator(Node root) {
         this.next = root;
         this.stack = new Stack<>();
-        //newAttempt(this.next);
+        pushAllLeftNodes(this.next);
     }
-    private void newAttempt(Node current) {
-        if(current == null) {
-            return;
+    private void pushAllLeftNodes(Node current) {
+        while(current != null) {
+            stack.push(current);
+            current = current.left;
+
         }
-        newAttempt(current.left);
-        stack.push(current);
-        newAttempt(current.right);
     }
     @Override
     public boolean hasNext() {
-        return this.stack.isEmpty();
+        return !this.stack.isEmpty();
     }
     @Override
     public Node next() {
-        Node item = null;
-        do {
-            if (this.next != null) {
-                this.stack.push(this.next);
-                this.next = this.next.left;
-            } else {
-                this.next = stack.pop();
-                item = this.next;
-                break;
-            }
-        } while (!this.stack.isEmpty());
-        return item;
+        Node current = stack.pop();
+        pushAllLeftNodes(current.right);
+        return current;
     }
     @Override
     public void remove() {
