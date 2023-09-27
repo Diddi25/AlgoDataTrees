@@ -19,7 +19,9 @@ public class TreeIterator<K extends Comparable <K>,V> implements Iterator<Node<K
     @Override
     public Node<K,V> next() {
         Node<K,V> current = stack.pop();
-        pushAllLeftNodes(current.right);
+        if (current != null) {
+            pushAllLeftNodes(current.right);
+        }
         return current;
     }
     @Override
