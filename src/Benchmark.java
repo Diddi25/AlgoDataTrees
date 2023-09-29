@@ -7,7 +7,7 @@ public class Benchmark {
     private static float min = Float.POSITIVE_INFINITY;
     private static float max = -1;
     private static void benchmark() {
-        int[] treeSizes = {100, 250, 500, 1000, 2500, 4000, 5500};
+        int[] treeSizes = {100, 250, 500, 1000, 2000, 4000, 8000};
         for(int treeSize: treeSizes) {
             System.out.printf("%5d", treeSize);
             float min1 = benchmarkAddMethod(treeSize);
@@ -23,10 +23,13 @@ public class Benchmark {
         }
     }
     private static BinaryTree<Integer, Integer> fillTreeWithNewNodes(int treeSize) {
-        int[] randomKeys = GenerateArray.unSorted(treeSize, 100);
+        int[] randomKeys = GenerateArray.sorted(treeSize, 100);
         int[] randomValues = GenerateArray.unSorted(treeSize, 10);
         BinaryTree<Integer, Integer> tree = new BinaryTree<>();
-        for (int i = 0; i < treeSize; i++) {
+        for (int i = 0; i < treeSize/2; i++) {
+            tree.add(randomKeys[i], randomValues[i]);
+        }
+        for (int i = treeSize/2; i < treeSize; i++) {
             tree.add(randomKeys[i], randomValues[i]);
         }
         return tree;
@@ -34,8 +37,8 @@ public class Benchmark {
     private static float benchmarkAddMethod(int treeSize) {
         float takeTime = 0;
         for (int i = 0; i < tries; i++) {
-            int[] randomKeys = GenerateArray.unSorted(treeSize, 1000);
-            int[] randomValues = GenerateArray.unSorted(treeSize, 10);
+            int[] randomKeys = GenerateArray.sorted(treeSize, 1000);
+            int[] randomValues = GenerateArray.sorted(treeSize, 10);
             BinaryTree<Integer, Integer> tree = new BinaryTree<>();
             long t0 = System.nanoTime();
             for (int j = 0; j < treeSize; j++) {
@@ -68,7 +71,7 @@ public class Benchmark {
             BinaryTree<Integer, Integer> tree = fillTreeWithNewNodes(n);
             long t0 = System.nanoTime();
             for (Node<Integer, Integer> j: tree) {
-                Integer value = j.value;
+                //Integer value = j.value;
                 //System.out.println("next value " + j.value);
             }
             long t1 = System.nanoTime();

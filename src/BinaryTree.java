@@ -1,5 +1,4 @@
 import java.util.Iterator;
-
 public class BinaryTree<K extends Comparable<K>, V> implements Iterable<Node<K,V>>{
     Node<K,V> root;
     public BinaryTree() {
