@@ -60,8 +60,8 @@ public class Benchmark {
                 t0 = System.nanoTime();
                 tree.lookup(randomLookupElements[j]);
                 t1 = System.nanoTime();
+                takeTime = averageTime(t1 - t0);
             }
-            takeTime = averageTime(t1 - t0);
         }
         return takeTime;
     }
